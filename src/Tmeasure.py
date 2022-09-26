@@ -1,6 +1,6 @@
 #This for the adafruit library.# it is based on the old welhouse.py
 # however had to donload a different library. see wget https://raw.githubusercontent.com/adafruit/Adafruit_CircuitPython_BME280/2.6.5/adafruit_bme280/basic.py
-
+ 
 import time
 
 import board #!!!!!!! uncomment this on Linux
