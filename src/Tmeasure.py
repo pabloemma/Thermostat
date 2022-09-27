@@ -105,11 +105,11 @@ class Tmeas(object):
 
         #Lets only deal with integer
         a=float(set_value)
-        b=int(a)
-        tm= int(self.RV.TconvertC2F(self.result['Temp']))
+        b=int(a) # desired t
+        tm= int(self.RV.TconvertC2F(self.result['Temp'])) # measured T
         # now compare with measured value
         print('current temp', self.RV.TconvertC2F(self.result['Temp']),' desired T :',b)
-        if b < tm:
+        if b > tm:
             open_valve = 1 # open valve
             print('we are opening the valve')
         elif b == tm:
