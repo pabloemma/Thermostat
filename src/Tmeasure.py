@@ -9,6 +9,8 @@ import busio
 import basic
 import random
 import json
+import ReadValue
+
 
 class Tmeas(object):
     """ class to measure the temperature from the Bosch BE280
@@ -50,7 +52,7 @@ class Tmeas(object):
         #        print(json.loads(self.PseudoData()))
         #        time.sleep(10)
             
-  
+        self.RV=ReadValue.MyInput()
         
     def InitializeI2C(self):
         """Initailze the I2C system"""
@@ -104,7 +106,7 @@ class Tmeas(object):
         #Lets only deal with integer
         a=float(set_value)
         b=int(a)
-        tm= self.result['Temp']
+        tm= self.RV.ConvertC2F(self.result['Temp'])
         # now compare with measured value
         if b < tm:
             open_valve = 1 # open valve
