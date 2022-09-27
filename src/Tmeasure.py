@@ -106,7 +106,7 @@ class Tmeas(object):
         #Lets only deal with integer
         a=float(set_value)
         b=int(a)
-        tm= self.RV.ConvertC2F(self.result['Temp'])
+        tm= self.RV.TconvertC2F(self.result['Temp'])
         # now compare with measured value
         if b < tm:
             open_valve = 1 # open valve
