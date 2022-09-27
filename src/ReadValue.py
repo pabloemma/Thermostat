@@ -61,6 +61,7 @@ class MyInput(object):
             return
 
         else:
+            #also create a backup file
             backup = self.filename+'_bck'
             fh = open(self.filename,'w')
             fh.write(str(t))
