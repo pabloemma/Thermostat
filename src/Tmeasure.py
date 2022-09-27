@@ -15,7 +15,7 @@ class Tmeas(object):
     based on example code from adafruit using their library
     """
 
-    def __init__(self,ID):
+    def __init__(self,ID=0,tempfile='Tselect.txt'):
         '''
         ID is the temp sensor
         0: Well House
@@ -36,6 +36,7 @@ class Tmeas(object):
         self.ID = ID
         self.result = {'ID':ID,'Temp':0.,'Humidity':0.,'Pressure':0.,'Altitude':0.}
 
+        self.TempFile = tempfile
 
         #switch for debug
         self.debug = True
@@ -93,6 +94,31 @@ class Tmeas(object):
         #return json.dumps(self.result)
         return self.result
     
+    def CheckT(self):
+        ''' Checks if tmeperature is what it should be'''
+
+        fh=open(self.TempFile,'r')
+        set_value = fh.readline()
+        fh.close()
+
+        #Lets only deal with integer
+        a=float(set_value)
+        b=int(a)
+        tm= self.result['Temp']
+        # now compare with measured value
+        if b < tm:
+            open_valve = 1 # open valve
+            print('we are opening the valve')
+        elif b == tm:
+            open_valve = 0 # don't change the valve
+            print('we are leaving the valve')
+        else:
+            open_valve = -1 # close the valve
+            print('we are closing the valve')
+        
+        return open_valve
+
+
     def PseudoData(self):
         """ create pseudo data for test purposes"""
         self.result['Temp'] = random.uniform(10.,80.)
@@ -110,4 +136,5 @@ if __name__ == "__main__":
     TM = Tmeas(0)
     while 1:
         TM.Measure()
+        TM.CheckT()
         time.sleep(10)
