@@ -106,7 +106,7 @@ class Tmeas(object):
         #Lets only deal with integer
         a=float(set_value)
         b=int(a)
-        tm= self.RV.TconvertC2F(self.result['Temp'])
+        tm= int(self.RV.TconvertC2F(self.result['Temp']))
         # now compare with measured value
         print('current temp', self.RV.TconvertC2F(self.result['Temp']),' desired T :',b)
         if b < tm:
