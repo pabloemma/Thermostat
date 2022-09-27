@@ -108,6 +108,7 @@ class Tmeas(object):
         b=int(a)
         tm= self.RV.TconvertC2F(self.result['Temp'])
         # now compare with measured value
+        print('current temp', self.RV.TconvertC2F(self.result['Temp']),' desired T :',b)
         if b < tm:
             open_valve = 1 # open valve
             print('we are opening the valve')
