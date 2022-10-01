@@ -25,3 +25,4 @@ class MyRelay(object):
 if __name__ == "__main__":
 
     MR = MyRelay()
+    MR.SetRelayOn(0)
