@@ -12,14 +12,14 @@ class MyRelay(object):
         print("Boards: ",boards)
 
 
-    def SetRelayOn(self,board):
+    def SetRelayOn(self,boards):
         relay = 1
-        result = usbrelay_py.board_control(board,relay,1)
+        result = usbrelay_py.board_control(boards[0],relay,1)
         return
 
-    def SetRelayOff(self,board):
+    def SetRelayOff(self,boards):
         relay = 1
-        result = usbrelay_py.board_control(board,relay,0)
+        result = usbrelay_py.board_control(boards[0],relay,0)
         return
 
 if __name__ == "__main__":
