@@ -25,4 +25,4 @@ class MyRelay(object):
 if __name__ == "__main__":
 
     MR = MyRelay()
-    MR.SetRelayOn(0)
+    MR.SetRelayOn('3X9XI_0')
