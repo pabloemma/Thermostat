@@ -9,7 +9,7 @@ class MyRelay(object):
         print("Count: ",count)
 
         self.boards = usbrelay_py.board_details()
-        print("Boards: ",boards)
+        print("Boards: ",self.boards)
         
 
     def SetRelayOn(self):
