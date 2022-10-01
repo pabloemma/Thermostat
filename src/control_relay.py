@@ -8,21 +8,21 @@ class MyRelay(object):
         count = usbrelay_py.board_count()
         print("Count: ",count)
 
-        boards = usbrelay_py.board_details()
+        self.boards = usbrelay_py.board_details()
         print("Boards: ",boards)
+        
 
-
-    def SetRelayOn(self,boards):
+    def SetRelayOn(self):
         relay = 1
-        result = usbrelay_py.board_control(boards[0],relay,1)
+        result = usbrelay_py.board_control(self.boards[0],relay,1)
         return
 
-    def SetRelayOff(self,boards):
+    def SetRelayOff(self):
         relay = 1
-        result = usbrelay_py.board_control(boards[0],relay,0)
+        result = usbrelay_py.board_control(self.boards[0],relay,0)
         return
 
 if __name__ == "__main__":
 
     MR = MyRelay()
-    MR.SetRelayOn('3X9XI_1')
+    MR.SetRelayOn()
