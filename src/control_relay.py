@@ -14,6 +14,7 @@ class MyRelay(object):
 
     def SetRelayOn(self):
         relay = 1
+        print(self.boards[0])
         result = usbrelay_py.board_control(self.boards[0],relay,1)
         return
 
