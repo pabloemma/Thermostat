@@ -141,8 +141,8 @@ class Tmeas(object):
         opens or closes the valve. A relay value of 1 means open heat valve, 0 means close heat valve'''
         if(valve_state == 0):
             #close the valve
-            command = 'python3 /home/git/Thermostat/src/control_relay.py -r 1 -s 0'
-            ssh = subprocess.Popen(["ssh", "%s" % HOST, COMMAND],
+            COMMAND = 'python3 /home/klein/git/Thermostat/src/control_relay.py -r 1 -s 0'
+            ssh = subprocess.Popen(["ssh", "%s" % self.relay_ip, COMMAND],
                        shell=False,
                        stdout=subprocess.PIPE,
                        stderr=subprocess.PIPE)
@@ -156,15 +156,26 @@ class Tmeas(object):
         
         elif(valve_state == 1):
             #open the valve
-            command = 'python3 /home/git/Thermostat/src/control_relay.py -r 1 -s 1'
- 
+            COMMAND = 'python3 /home/klein/git/Thermostat/src/control_relay.py -r 1 -s 1'
+            ssh = subprocess.Popen(["ssh", "%s" % self.relay_ip, COMMAND],
+                       shell=False,
+                       stdout=subprocess.PIPE,
+                       stderr=subprocess.PIPE)
+            result = ssh.stdout.readlines()
+            if result == []:
+                error = ssh.stderr.readlines()
+                print >>sys.stderr, "ERROR: %s" % error
+            else:
+                print(result)
+
+
         else:
             print(valve_state,' not defined')
             pass
 
 
 if __name__ == "__main__":
-    TM = Tmeas(0)
+    TM = Tmeas(0,relay_ip='192.168.2.25')
     while 1:
         TM.Measure()
         TM.CheckT()
