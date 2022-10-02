@@ -8,12 +8,17 @@ class MyRelay(object):
         #  The relay_number is the number of the relay you wasnt to control
         # But note : its starts counting from 1 and NOT 0
 
+        self.debug = False
+
         self.relay_number = relay_number
         count = usbrelay_py.board_count()
-        print("Count: ",count)
+        if(self.debug):
+    
+            print("Count: ",count)
 
         self.boards = usbrelay_py.board_details()
-        print("Boards: ",self.boards)
+        if(self.debug):
+            print("Boards: ",self.boards)
         
 
     def SetRelayOn(self):
@@ -23,8 +28,8 @@ class MyRelay(object):
         '''
 
         
-        
-        print(self.boards[0][0])
+        if(self.debug):
+            print(self.boards[0][0])
         result = usbrelay_py.board_control(self.boards[0][0],self.relay_number,1)
         return
 
@@ -49,7 +54,9 @@ class MyRelay(object):
         # returns a dictionary wher value 0 means open and 1 means close
         relay_state_dict={}
         for k in range(len(a)-1):
-            print(a[k])
+            if(self.debug):
+    
+                print(a[k])
             if(a[k].find('=1')) < 1 :
                 print('relay ',k+1,' is open')
                 temp = 'relay '+str(k+1)
@@ -59,7 +66,9 @@ class MyRelay(object):
                 temp = 'relay '+str(k+1)
                 relay_state_dict[temp]=1
 
-        print (relay_state_dict)
+        if(self.debug):
+    
+            print (relay_state_dict)
         return relay_state_dict
 
 
