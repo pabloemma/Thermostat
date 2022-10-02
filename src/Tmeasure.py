@@ -113,12 +113,14 @@ class Tmeas(object):
         print('current temp', self.RV.TconvertC2F(self.result['Temp']),' desired T :',b)
         if b > tm:
             open_valve = 1 # open valve
+            self.ControlValve(open_valve)
             print('we are opening the valve')
         elif b == tm:
             open_valve = 0 # don't change the valve
             print('we are leaving the valve')
         else:
             open_valve = -1 # close the valve
+            self.ControlValve(open_valve)
             print('we are closing the valve')
         
         return open_valve
