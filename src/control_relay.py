@@ -12,18 +12,25 @@ class MyRelay(object):
         print("Boards: ",self.boards)
         
 
-    def SetRelayOn(self):
-        relay = 1
-        print(self.boards[0])
-        result = usbrelay_py.board_control(self.boards[0],relay,1)
+    def SetRelayOn(self,relay_number):
+        '''This sets the relay to closed
+        The relay_number is the number of the relay you wasnt to control
+        But note : its starts counting from 1 and NOT 0
+        '''
+
+        relay = relay_number
+        
+        print(self.boards[0][0])
+        result = usbrelay_py.board_control(self.boards[0][0],relay,1)
         return
 
-    def SetRelayOff(self):
-        relay = 1
-        result = usbrelay_py.board_control(self.boards[0],relay,0)
+    def SetRelayOff(self,relay_number):
+        relay = relay_number
+        result = usbrelay_py.board_control(self.boards[0][0],relay,0)
         return
 
 if __name__ == "__main__":
 
     MR = MyRelay()
-    MR.SetRelayOn()
+    MR.SetRelayOn(2)
+    MR.SetRelayOff(2)
