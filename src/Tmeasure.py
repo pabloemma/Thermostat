@@ -119,7 +119,7 @@ class Tmeas(object):
             open_valve = 0 # don't change the valve
             print('we are leaving the valve')
         else:
-            open_valve = -1 # close the valve
+            open_valve = 0 # close the valve
             self.ControlValve(open_valve)
             print('we are closing the valve')
         
