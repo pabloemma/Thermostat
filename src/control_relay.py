@@ -1,8 +1,9 @@
 import usbrelay_py
 import subprocess #for cli fucntin
+import argparse
 class MyRelay(object):
 
-    def __init__(self,relay_number = 1):
+    def __init__(self,relay_number = 1,state = None):
 
         #this initializes the usb relay
         #  The relay_number is the number of the relay you wasnt to control
@@ -19,7 +20,32 @@ class MyRelay(object):
         self.boards = usbrelay_py.board_details()
         if(self.debug):
             print("Boards: ",self.boards)
-        
+        if(state == 1):
+            self.SetRelayOn()
+        elif(state==0):
+            self.SetRelayOff()
+        elif(state == None):
+            pass
+        self.GetCLIArgs()
+
+    def GetCLIArgs(self):
+        '''Gets command line arguments, the only one allowed are relay number and state
+            r: relay_number, s=state'''
+        parser = argparse.ArgumentParser()
+        parser.add_argument("-r", "--relay", help = "relay number")
+        parser.add_argument("-s", "--state", help = "relay state (1 or 0)")
+        # Read arguments from command line
+        args = parser.parse_args()
+        if(args.relay != None):
+
+            self.relay_number = int(args.relay)
+            if(args.state == '1'):
+                print('state',args.state)
+                self.SetRelayOn()
+            elif(args.state=='0'):
+                self.SetRelayOff()
+                exit()
+
 
     def SetRelayOn(self):
         '''This sets the relay to closed
@@ -75,7 +101,8 @@ class MyRelay(object):
 
 if __name__ == "__main__":
 
-    MR = MyRelay(relay_number = 1)
-    MR.SetRelayOn()
-    MR.GetRelayState()
+    MR = MyRelay(relay_number = 1,state=0)
+    
+    #MR.SetRelayOn()
+    #MR.GetRelayState()
     #MR.SetRelayOff()

@@ -10,6 +10,8 @@ import basic
 import random
 import json
 import ReadValue
+import subprocess 
+import sys
 
 
 class Tmeas(object):
@@ -17,7 +19,7 @@ class Tmeas(object):
     based on example code from adafruit using their library
     """
 
-    def __init__(self,ID=0,tempfile='Tselect.txt'):
+    def __init__(self,ID=0,tempfile='Tselect.txt',relay_ip = '196.168.2.167'):
         '''
         ID is the temp sensor
         0: Well House
@@ -27,7 +29,7 @@ class Tmeas(object):
         self.testing = False  # this is a flag to test the program without sensor
                              #will do the connection to the server and send pseudo data
  
-         
+        self.relay_ip =  relay_ip 
        
          
         # initialize the random generator for testing purposes
@@ -132,7 +134,31 @@ class Tmeas(object):
         #return json.dumps(self.result)
         return self.result
 
+    def ControlValve(self,valve_state):
+        '''this sends a command of either open or close a relay and cosequently
+        opens or closes the valve. A relay value of 1 means open heat valve, 0 means close heat valve'''
+        if(valve_state == 0):
+            #close the valve
+            command = 'python3 /home/git/Thermostat/src/control_relay.py -r 1 -s 0'
+            ssh = subprocess.Popen(["ssh", "%s" % HOST, COMMAND],
+                       shell=False,
+                       stdout=subprocess.PIPE,
+                       stderr=subprocess.PIPE)
+            result = ssh.stdout.readlines()
+            if result == []:
+                error = ssh.stderr.readlines()
+                print >>sys.stderr, "ERROR: %s" % error
+            else:
+                print(result)
 
+        
+        elif(valve_state == 1):
+            #open the valve
+            command = 'python3 /home/git/Thermostat/src/control_relay.py -r 1 -s 1'
+ 
+        else:
+            print(valve_state,' not defined')
+            pass
 
 
 if __name__ == "__main__":
