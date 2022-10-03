@@ -19,7 +19,7 @@ class Tmeas(object):
     based on example code from adafruit using their library
     """
 
-    def __init__(self,ID=0,tempfile='/home/pi/git/Themostat/src/Tselect.txt',relay_ip = '196.168.2.167'):
+    def __init__(self,ID=0,tempfile='/home/pi/git/Thermostat/src/Tselect.txt',relay_ip = '196.168.2.167'):
         '''
         ID is the temp sensor
         0: Well House
