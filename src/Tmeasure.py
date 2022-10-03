@@ -156,7 +156,7 @@ class Tmeas(object):
         
         elif(valve_state == 1):
             #open the valve
-            COMMAND = 'python3 /home/klein/git/Thermostat/src/control_relay.py -r 1 -s 1'
+            COMMAND = 'python3 /home/pi/git/Thermostat/src/control_relay.py -r 1 -s 1'
             ssh = subprocess.Popen(["ssh", "%s" % self.relay_ip, COMMAND],
                        shell=False,
                        stdout=subprocess.PIPE,
@@ -175,7 +175,7 @@ class Tmeas(object):
 
 
 if __name__ == "__main__":
-    TM = Tmeas(0,relay_ip='192.168.2.25')
+    TM = Tmeas(0,relay_ip='192.168.2.113')
     while 1:
         TM.Measure()
         TM.CheckT()
