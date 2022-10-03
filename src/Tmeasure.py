@@ -141,7 +141,7 @@ class Tmeas(object):
         opens or closes the valve. A relay value of 1 means open heat valve, 0 means close heat valve'''
         if(valve_state == 0):
             #close the valve
-            COMMAND = 'python3 /home/klein/git/Thermostat/src/control_relay.py -r 1 -s 0'
+            COMMAND = 'python3 /home/git/Thermostat/src/control_relay.py -r 1 -s 0'
             ssh = subprocess.Popen(["ssh", "%s" % self.relay_ip, COMMAND],
                        shell=False,
                        stdout=subprocess.PIPE,
