@@ -19,7 +19,7 @@ import os
 
 class MyInput(object):
 
-    def __init__(self,file='Tselect.txt'):
+    def __init__(self,file='/home/pi/git/Thermostat/src/Tselect.txt'):
 
         self.filename = file
         self.CurrentTempF = 60
