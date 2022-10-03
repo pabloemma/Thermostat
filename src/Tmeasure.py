@@ -55,6 +55,7 @@ class Tmeas(object):
         #        time.sleep(10)
             
         self.RV=ReadValue.MyInput()
+        self.valve_state = 0 # start with assuming valve is closed
         
     def InitializeI2C(self):
         """Initailze the I2C system"""
@@ -112,16 +113,24 @@ class Tmeas(object):
         # now compare with measured value
         print('current temp', self.RV.TconvertC2F(self.result['Temp']),' desired T :',b)
         if b > tm:
-            open_valve = 1 # open valve
+            if(self.valve_state == 0):
+                open_valve = 1 # open valve
+                self.valve_state = 1
+                print('opening valve')
             self.ControlValve(open_valve)
-            print('we are opening the valve')
+            if(self.debug):
+                print('we are opening the valve')
         elif b == tm:
             open_valve = 0 # don't change the valve
-            print('we are leaving the valve')
+            if(self.debug):
+                print('we are leaving the valve')
         else:
-            open_valve = 0 # close the valve
-            self.ControlValve(open_valve)
-            print('we are closing the valve')
+            if(self.valve_state == 1):
+     
+                open_valve = 0 # close the valve
+                self.valve_state = 0
+                self.ControlValve(open_valve)
+                print('we are closing the valve')
         
         return open_valve
 
