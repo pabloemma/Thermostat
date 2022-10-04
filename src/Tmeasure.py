@@ -194,7 +194,7 @@ class Tmeas(object):
          
         fh = open(self.CurrentT,'w')
         t1 =  (t*1.8)+32.
-        full_string = str(t)+'  '+str(t1)
+        full_string = str(t)+'C  '+str(t1)+'F'
         fh.write(full_string)
         fh.close()
         return
