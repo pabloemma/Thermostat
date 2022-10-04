@@ -91,7 +91,8 @@ class Tmeas(object):
         self.result['Pressure'] = self.bme280.pressure
         self.result['Altitude'] = self.bme280.altitude
         
-        
+        # stor T
+        self.StoreT(self.bme280.temperature)
         # the data communication expects a string so we use json.dumps(result)
         #on the send side and json.loads(result) on the reciever to get back to dict
         
