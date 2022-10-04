@@ -12,6 +12,7 @@ import json
 import ReadValue
 import subprocess 
 import sys
+import os
 
 
 class Tmeas(object):
@@ -39,7 +40,7 @@ class Tmeas(object):
         # the dictionary of values which will be sent to the main server
         self.ID = ID
         self.result = {'ID':ID,'Temp':0.,'Humidity':0.,'Pressure':0.,'Altitude':0.}
-
+        self.CurrentT = "/home/pi/CurrentTemp.txt"
         self.TempFile = tempfile
 
         #switch for debug
@@ -182,6 +183,21 @@ class Tmeas(object):
         else:
             print(valve_state,' not defined')
             pass
+
+    def StoreT(self,t):
+        ''' here we write the temperature into the file, we always keep the previous one'''
+        # first backup the current file
+
+        #check if file exists
+        if os.path.isfile(self.CurrentT):
+         
+            fh = open(self.CurrentT,'w')
+            fh.write(str(t))
+            fh.close()
+            return
+
+        
+           
 
 
 if __name__ == "__main__":
