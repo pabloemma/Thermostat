@@ -190,12 +190,12 @@ class Tmeas(object):
         # first backup the current file
 
         #check if file exists
-        if os.path.isfile(self.CurrentT):
+        #if os.path.isfile(self.CurrentT):
          
-            fh = open(self.CurrentT,'w')
-            fh.write(str(t))
-            fh.close()
-            return
+        fh = open(self.CurrentT,'w')
+        fh.write(str(t))
+        fh.close()
+        return
 
         
            
