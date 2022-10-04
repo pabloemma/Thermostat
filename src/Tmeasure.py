@@ -193,7 +193,8 @@ class Tmeas(object):
         #if os.path.isfile(self.CurrentT):
          
         fh = open(self.CurrentT,'w')
-        fh.write(str(t))
+        t1 = lambda t : (t*1.8)+32.
+        fh.write(str(t),'   ', str(t1))
         fh.close()
         return
 
