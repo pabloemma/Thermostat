@@ -40,7 +40,8 @@ class Tmeas(object):
         # the dictionary of values which will be sent to the main server
         self.ID = ID
         self.result = {'ID':ID,'Temp':0.,'Humidity':0.,'Pressure':0.,'Altitude':0.}
-        user = os.getlogin()
+        #user = os.getlogin()
+        user='pi'
         self.CurrentT = '/home/'+user+'/CurrentTemp.txt'
         self.TempFile = tempfile
 
