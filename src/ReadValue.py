@@ -34,10 +34,11 @@ class MyInput(object):
             fh=open(self.CurrentSetValueFile,'r')
             current_t = fh.readline()
             fh.close()
+            return current_t
         except:
             print('Cannot find ',self.CurrentSetValueFile)
 
-        return current_t
+        return -1
 
     def TheLoop(self):
         ''' this is the main loop, we wait for input and 
