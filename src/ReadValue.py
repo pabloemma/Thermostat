@@ -38,7 +38,7 @@ class MyInput(object):
         except:
             print('Cannot find ',self.CurrentSetValueFile)
 
-        return -1
+        return '-1'
 
     def TheLoop(self):
         ''' this is the main loop, we wait for input and 
