@@ -16,6 +16,7 @@ Tselect.txt is the current selected temperature
 
 import shutil
 import os
+import streamlit as st
 
 class MyInput(object):
 
@@ -46,6 +47,34 @@ class MyInput(object):
                 print('Leaving')
                 exit(0)
     
+    def MyStreamLit(self):
+        """creates the webpage interface through streamlit"""
+
+        user = os.getlogin()
+        self.CurrentT = '/home/'+user+'/CurrentTemp.txt'
+        try:
+            fh=open(self.CurrentT,'r')
+            current_t = fh.readline()
+            # now split it:
+            b = current_t.split(' ')
+            a = b[0].replace('C','')
+            c = b[2].replace('F','')
+            converted_t = int(float(c))
+            fh.close()
+        except:
+            print('cant find file',self.CurrentT)
+        mytemp = 'current temperature  ' + str(int(float(c)))
+
+
+        st.header(mytemp)
+        x = st.slider('Temperature',min_value = 60, max_value=80)
+        newtemp = 'the new temperature is '+str(x)
+        st.header(newtemp)
+        self.StoreT(float(x))
+        #print(x)
+
+
+
     def StoreT(self,t):
         ''' here we write the temperature into the file, we always keep the previous one'''
         # first backup the current file
@@ -87,6 +116,8 @@ class MyInput(object):
 
 
 if __name__ == "__main__":
-    MI = MyInput()
-    MI.TheLoop()
-    print(MI.TconvertC2F(25.))
+    MI = MyInput(file='/home/klein/git/Thermostat/src/Tselect.txt')
+    #MI.TheLoop()
+    MI.MyStreamLit()
+
+    #print(MI.TconvertC2F(25.))
