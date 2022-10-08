@@ -16,7 +16,7 @@ python3 -u /home/pi/git/Thermostat/src/Tmeasure.py  &
 
 echo "Starting the process Tmeasure";
 fi;
-if [ $(ps -efa | grep -v grep | grep ReadValue.py -c) -gt 0 ] ;
+if [ $(ps -efa | grep -v grep | grep streamlit -c) -gt 0 ] ;
 then
     echo "Process running ...";
 else
@@ -25,7 +25,7 @@ else
 #./update_speedtest
 #cd ~
 
-python3 -u /home/pi/git/Thermostat/src/ReadValue.py  &
+streamlit run /home/pi/git/Thermostat/src/ReadValue.py  &
 
 
 echo "Starting the process ReadValue";

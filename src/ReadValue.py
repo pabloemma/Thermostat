@@ -129,7 +129,9 @@ class MyInput(object):
 
 
 if __name__ == "__main__":
-    MI = MyInput(file='/home/pi/git/Thermostat/src/Tselect.txt')
+    import os
+    user = os.getlogin()
+    MI = MyInput(file='/home/'+user+'/git/Thermostat/src/Tselect.txt')
     #MI.TheLoop()
     MI.MyStreamLit()
 
