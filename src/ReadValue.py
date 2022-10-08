@@ -3,16 +3,15 @@ author:        andi Klein <pabloemma@gmail.com>
 date:          2022-09-27 11:24:45
 '''
 
-'''
-This is a very basic script to control the temperature. A file has the present 
-temperature and the program is in a while loop checking for input. If there is input 
-and it will overwrite the current file. This file is thenc checked by the thermostat controlfile to
-see if it has changed. If so, it will send a comand of relay cl;ose or open depending 
-on the T. If Tnew is >= Tfile, the valve has to be open. if Tnew <Tmeas then close the valve
+#This is a very basic script to control the temperature. A file has the present 
+#temperature and the program is in a while loop checking for input. If there is input 
+#and it will overwrite the current file. This file is thenc checked by the thermostat controlfile to
+#see if it has changed. If so, it will send a comand of relay cl;ose or open depending 
+#on the T. If Tnew is >= Tfile, the valve has to be open. if Tnew <Tmeas then close the valve
 
-Tselect.txt is the current selected temperature 
+#Tselect.txt is the current selected temperature 
 
-'''
+
 
 import shutil
 import os
@@ -23,9 +22,22 @@ class MyInput(object):
     def __init__(self,file='/home/pi/git/Thermostat/src/Tselect.txt'):
 
         self.filename = file
+
         self.CurrentTempF = 60
         self.CurrentTempC = self.TconvertF2C(self.CurrentTempF)
 
+
+
+    def GetStartValue(self):
+        self.CurrentSetValueFile = self.filename
+        try:
+            fh=open(self.CurrentSetValueFile,'r')
+            current_t = fh.readline()
+            fh.close()
+        except:
+            print('Cannot find ',self.CurrentSetValueFile)
+
+        return current_t
 
     def TheLoop(self):
         ''' this is the main loop, we wait for input and 
@@ -63,11 +75,11 @@ class MyInput(object):
             fh.close()
         except:
             print('cant find file',self.CurrentT)
-        mytemp = 'current temperature  ' + str(int(float(c)))
-
-
+        mytemp = 'Current Temperature  ' + str(int(float(c)))
+        myset_t = 'Current Set Temperature '+ self.GetStartValue()+'\n\n'
+        st.header(myset_t)
         st.header(mytemp)
-        x = st.slider('Temperature',min_value = 60, max_value=80)
+        x = st.slider('Temperature',min_value = 60, max_value=90)
         newtemp = 'the new temperature is '+str(x)
         st.header(newtemp)
         self.StoreT(float(x))
