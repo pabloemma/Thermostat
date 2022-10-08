@@ -34,7 +34,7 @@ class MyInput(object):
             fh=open(self.CurrentSetValueFile,'r')
             current_t = fh.readline()
             fh.close()
-            return current_t
+            return str(current_t)
         except:
             print('Cannot find ',self.CurrentSetValueFile)
 
