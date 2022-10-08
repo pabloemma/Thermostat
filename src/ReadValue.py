@@ -63,7 +63,8 @@ class MyInput(object):
     def MyStreamLit(self):
         """creates the webpage interface through streamlit"""
 
-        user = os.getlogin()
+ #       user = os.getlogin()
+        user='pi'
         self.CurrentT = '/home/'+user+'/CurrentTemp.txt'
         try:
             fh=open(self.CurrentT,'r')
