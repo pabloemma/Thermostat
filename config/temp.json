@@ -2,7 +2,7 @@
     "Temp": {
         "column_names" : "time,temperature,pressure,humidity",
         "output_dir"    : "/home/pi/scratch/",
-        "frequency"     : "1"
+        "frequency"     : "10"
 
 
     }
