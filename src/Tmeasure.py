@@ -13,16 +13,18 @@ import ReadValue
 import subprocess 
 import sys
 import os
-import pandas as PD
-import matplotlib as MP
 
+import datetime as dt
+import matplotlib as mp
+
+import CreatePandas as cp
 
 class Tmeas(object):
     """ class to measure the temperature from the Bosch BE280
     based on example code from adafruit using their library
     """
 
-    def __init__(self,ID=0,tempfile='/home/pi/git/Thermostat/src/Tselect.txt',relay_ip = '196.168.2.167'):
+    def __init__(self,ID=0,tempfile='/home/pi/git/Thermostat/src/Tselect.txt',relay_ip = '196.168.2.167',config_file = '/home/klein/git/Thermostat/config/temp.json'):
         '''
         ID is the temp sensor
         0: Well House
@@ -33,6 +35,12 @@ class Tmeas(object):
                              #will do the connection to the server and send pseudo data
  
         self.relay_ip =  relay_ip 
+
+        #instantiate the Pandas system
+ 
+        self.MyP = cp.MyPandas(config_file=config_file)
+         
+ 
        
          
         # initialize the random generator for testing purposes
@@ -46,6 +54,8 @@ class Tmeas(object):
         user='pi'
         self.CurrentT = '/home/'+user+'/CurrentTemp.txt'
         self.TempFile = tempfile
+
+        self.counter = 0 # counter for writing away data
 
         #switch for debug
         self.debug = False
@@ -61,7 +71,8 @@ class Tmeas(object):
             
         self.RV=ReadValue.MyInput()
         self.valve_state = 0 # start with assuming valve is closed
-        
+
+       
     def InitializeI2C(self):
         """Initailze the I2C system"""
         i2c = busio.I2C(board.SCL, board.SDA)
@@ -94,9 +105,12 @@ class Tmeas(object):
         self.result['Humidity'] = self.bme280.humidity
         self.result['Pressure'] = self.bme280.pressure
         self.result['Altitude'] = self.bme280.altitude
-        
+
+        #get time
+        time_now=dt.datetime.now()
+        self.data_list = [time_now,self.bme280.temperature,self.bme280.pressure,self.bme280.humidity]
         # stor T
-        self.StoreT(self.bme280.temperature)
+        self.StoreT()
         # the data communication expects a string so we use json.dumps(result)
         #on the send side and json.loads(result) on the reciever to get back to dict
         
@@ -201,6 +215,13 @@ class Tmeas(object):
         full_string = str(t)+'C  '+str(t1)+'F'
         fh.write(full_string)
         fh.close()
+
+        # we write away the data only so often:
+        if(self.counter == self.MyP.frequency):
+            self.MyP.AddData(self.data_list)
+            self.counter = 0
+        else:
+            self.counter += 1
         return
 
         
@@ -208,7 +229,7 @@ class Tmeas(object):
 
 
 if __name__ == "__main__":
-    TM = Tmeas(0,relay_ip='192.168.2.113')
+    TM = Tmeas(0,relay_ip='192.168.2.113',   config_file = '/home/klein/git/Thermostat/config/temp.json')
     while 1:
         TM.Measure()
         TM.CheckT()
