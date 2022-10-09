@@ -218,7 +218,7 @@ class Tmeas(object):
         fh.close()
 
         # we write away the data only so often:
-        if(self.counter == self.MyP.frequency):
+        if(self.counter == int(self.MyP.frequency)):
             self.MyP.AddData(self.data_list)
             self.counter = 0
         else:
