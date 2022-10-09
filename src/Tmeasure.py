@@ -229,7 +229,7 @@ class Tmeas(object):
 
 
 if __name__ == "__main__":
-    TM = Tmeas(0,relay_ip='192.168.2.113',   config_file = '/home/klein/git/Thermostat/config/temp.json')
+    TM = Tmeas(0,relay_ip='192.168.2.113',   config_file = '/home/pi/git/Thermostat/config/temp.json')
     while 1:
         TM.Measure()
         TM.CheckT()
