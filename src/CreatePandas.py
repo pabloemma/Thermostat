@@ -27,7 +27,11 @@ class MyPandas(object):
         self.MyFrame = pd.DataFrame(columns = self.column_names)
         print(self.MyFrame)
         # write to file , we choose csv file
-        self.MyFrame.to_csv(self.file_out,index=False) # no , in the beginning
+        if os.path.exists(self.file_out):
+            self.MyFrame.to_csv(self.file_out,index=False,mode='a') # no , in the beginning
+        else:
+            self.MyFrame.to_csv(self.file_out,index=False,mode='w') # no , in the beginning
+ 
 
     def CreateFileName(self):
         '''creates filename based on date'''
@@ -35,6 +39,7 @@ class MyPandas(object):
         a = dt.datetime.today().strftime('%Y-%m-%d')
         
         self.file_out =self.output_dir+'Temperature_' + a+'_.csv'  #add hostname
+        return
         
     def ReadConfig(self,config_file):
         print("reading config file ", config_file)    # WGH mod: clarify which conf json we're actually reading
@@ -43,6 +48,7 @@ class MyPandas(object):
             self.output_dir          = myconf['Temp']['output_dir']
             temp                     = myconf['Temp']['column_names']
             self.column_names        = temp.split(',')
+            self.frequency           = myconf['Temp']['frequency'] #  every frequency we will write out
         return
 
     def AddData(self,data_tuple):
