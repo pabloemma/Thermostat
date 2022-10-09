@@ -39,6 +39,7 @@ class Tmeas(object):
         #instantiate the Pandas system
  
         self.MyP = cp.MyPandas(config_file=config_file)
+        self.MyP.CreateFrame()
          
  
        
