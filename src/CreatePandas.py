@@ -28,7 +28,7 @@ class MyPandas(object):
         print(self.MyFrame)
         # write to file , we choose csv file
         if os.path.exists(self.file_out):
-            self.MyFrame.to_csv(self.file_out,index=False,mode='a') # no , in the beginning
+            pass # no , in the beginning
         else:
             self.MyFrame.to_csv(self.file_out,index=False,mode='w') # no , in the beginning
  
