@@ -110,7 +110,7 @@ class Tmeas(object):
         time_now=dt.datetime.now()
         self.data_list = [time_now,self.bme280.temperature,self.bme280.pressure,self.bme280.humidity]
         # stor T
-        self.StoreT()
+        self.StoreT(self.bme280.temperature)
         # the data communication expects a string so we use json.dumps(result)
         #on the send side and json.loads(result) on the reciever to get back to dict
         
