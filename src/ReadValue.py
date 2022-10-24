@@ -81,7 +81,7 @@ class MyInput(object):
         myset_t = 'Current Set Temperature '+ self.GetStartValue()+'\n\n'
         st.header(myset_t)
         st.header(mytemp)
-        x = st.slider('Temperature',min_value = 60, max_value=90)
+        x = st.slider('Temperature',min_value = 60, max_value=75)
         newtemp = 'the new temperature is '+str(x)
         st.header(newtemp)
         self.StoreT(float(x))
