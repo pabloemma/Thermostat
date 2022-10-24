@@ -4,7 +4,7 @@
 
 if [ $(ps -efa | grep -v grep | grep Tmeasure.py -c) -gt 0 ] ;
 then
-    echo "Process running ...";
+    echo "Process Tmeasure running ...";
 else
 #temporary if program dies download all the necessary programs
 #cd /home/pi/git/speedtest/src
@@ -18,7 +18,7 @@ echo "Starting the process Tmeasure";
 fi;
 if [ $(ps -efa | grep -v grep | grep streamlit -c) -gt 0 ] ;
 then
-    echo "Process running ...";
+    echo "Process streamlit running ...";
 else
 #temporary if program dies download all the necessary programs
 #cd /home/pi/git/speedtest/src
