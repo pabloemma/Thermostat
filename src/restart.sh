@@ -25,7 +25,7 @@ else
 #./update_speedtest
 #cd ~
 
-streamlit run /home/pi/git/Thermostat/src/ReadValue.py  &
+/home/pi/.local/bin/streamlit run /home/pi/git/Thermostat/src/ReadValue.py  &
 
 
 echo "Starting the process ReadValue";
