@@ -23,7 +23,7 @@ class MyInput(object):
 
         self.filename = file
 
-        self.CurrentTempF = 60
+        self.CurrentTempF = self.GetStartValue()
         self.CurrentTempC = self.TconvertF2C(self.CurrentTempF)
 
 
