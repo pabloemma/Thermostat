@@ -83,8 +83,10 @@ class MyInput(object):
         st.header(mywarning)
         st.header(myset_t)
         st.header(mytemp)
-        x = st.slider('Temperature',min_value = 60, max_value=75)
-        x_f = float(x)
+        x = st.slider('Temperature',min_value = 50, max_value=75)
+        if(x == 50):
+            x=self.GetStartValue()
+        
        
         newtemp = 'the new temperature is '+str(x)
         st.header(newtemp)
