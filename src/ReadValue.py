@@ -88,7 +88,7 @@ class MyInput(object):
             x=self.GetStartValue()
         
        
-        newtemp = 'the new temperature is '+str(x)
+        newtemp = 'the new set temperature is '+str(x)
         st.header(newtemp)
         self.StoreT(float(x))
   
