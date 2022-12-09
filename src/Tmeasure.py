@@ -180,7 +180,7 @@ class Tmeas(object):
             result = ssh.stdout.readlines()
             if result == []:
                 error = ssh.stderr.readlines()
-                print(error)
+                print("close valve",error)
                 sys.exit(0)
             else:
                 print(result)
@@ -196,7 +196,7 @@ class Tmeas(object):
             result = ssh.stdout.readlines()
             if result == []:
                 error = ssh.stderr.readlines()
-                print(error)
+                print("open valve",error)
                 sys.exit(0)
             else:
                 print(result)
