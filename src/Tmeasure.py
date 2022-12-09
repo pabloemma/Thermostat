@@ -196,7 +196,8 @@ class Tmeas(object):
             result = ssh.stdout.readlines()
             if result == []:
                 error = ssh.stderr.readlines()
-                print >>sys.stderr, "ERROR: %s" % error
+                print(error)
+                sys.exit(0)
             else:
                 print(result)
 
