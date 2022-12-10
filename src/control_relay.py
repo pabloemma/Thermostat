@@ -29,6 +29,9 @@ class MyRelay(object):
             if(self.debug):
                     print("at set_relay_off  ",a)
         elif(state == None):
+           if(self.debug):
+                    print("at relay = None  ",a)
+             
             pass
         self.GetCLIArgs()
 
