@@ -59,7 +59,9 @@ class MyRelay(object):
             if(args.state == '1'):
                 print('state',args.state)
                 self.SetRelayOn()
+                exit()
             elif(args.state=='0'):
+                print('state',args.state)
                 self.SetRelayOff()
                 exit()
 
