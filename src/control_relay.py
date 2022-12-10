@@ -9,7 +9,7 @@ class MyRelay(object):
         #  The relay_number is the number of the relay you wasnt to control
         # But note : its starts counting from 1 and NOT 0
 
-        self.debug = False
+        self.debug = True
 
         self.relay_number = relay_number
         count = usbrelay_py.board_count()
@@ -21,9 +21,13 @@ class MyRelay(object):
         if(self.debug):
             print("Boards: ",self.boards)
         if(state == 1):
-            self.SetRelayOn()
+            a = self.SetRelayOn()
+            if(self.debug):
+                print("at set_relay_on  ",a)
         elif(state==0):
-            self.SetRelayOff()
+            a = self.SetRelayOff()
+            if(self.debug):
+                    print("at set_relay_off  ",a)
         elif(state == None):
             pass
         self.GetCLIArgs()
@@ -57,12 +61,12 @@ class MyRelay(object):
         if(self.debug):
             print(self.boards[0][0])
         result = usbrelay_py.board_control(self.boards[0][0],self.relay_number,1)
-        return
+        return result
 
     def SetRelayOff(self):
         
         result = usbrelay_py.board_control(self.boards[0][0],self.relay_number,0)
-        return
+        return result
 
     def GetRelayState(self):
         '''due to the fact that the python version does 
