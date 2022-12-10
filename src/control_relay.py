@@ -103,9 +103,9 @@ class MyRelay(object):
 
 
 
-#if __name__ == "__main__":
+if __name__ == "__main__":
 
-#    MR = MyRelay(relay_number = 1,state=0)
+    MR = MyRelay()
     
     #MR.SetRelayOn()
     #MR.GetRelayState()
