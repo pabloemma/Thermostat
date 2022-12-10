@@ -12,10 +12,9 @@ class MyRelay(object):
         self.debug = True
 
 
-        self.GetCLIArgs()
+    
 
-
-
+    #setup relay board
 
         self.relay_number = relay_number
         count = usbrelay_py.board_count()
@@ -24,6 +23,12 @@ class MyRelay(object):
             print("Count: ",count)
 
         self.boards = usbrelay_py.board_details()
+
+
+
+        self.GetCLIArgs()
+
+
         if(self.debug):
             print("Boards: ",self.boards)
         if(state == 1):
