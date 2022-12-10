@@ -11,6 +11,12 @@ class MyRelay(object):
 
         self.debug = True
 
+
+        self.GetCLIArgs()
+
+
+
+
         self.relay_number = relay_number
         count = usbrelay_py.board_count()
         if(self.debug):
@@ -29,12 +35,11 @@ class MyRelay(object):
             if(self.debug):
                     print("at set_relay_off  ",a)
         elif(state == None):
-           if(self.debug):
+            if(self.debug):
                     print("at relay = None  ",a)
              
             pass
-        self.GetCLIArgs()
-
+ 
     def GetCLIArgs(self):
         '''Gets command line arguments, the only one allowed are relay number and state
             r: relay_number, s=state'''
