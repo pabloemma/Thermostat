@@ -20,7 +20,7 @@ import streamlit as st
 class MyInput(object):
 
     def __init__(self,file='/home/pi/git/Thermostat/src/Tselect.txt'):
-
+        self.debug = False
         self.filename = file
 
         self.CurrentTempF = float(self.GetStartValue())

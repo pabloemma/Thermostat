@@ -9,7 +9,7 @@ class MyRelay(object):
         #  The relay_number is the number of the relay you wasnt to control
         # But note : its starts counting from 1 and NOT 0
 
-        self.debug = True
+        self.debug = False
 
 
     
