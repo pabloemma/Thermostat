@@ -41,7 +41,7 @@ class MyRelay(object):
                     print("at set_relay_off  ",a)
         elif(state == None):
             if(self.debug):
-                    print("at relay = None  ",a)
+                    print("at relay = None  ")
              
             pass
  
