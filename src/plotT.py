@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 fig = plt.figure()
 ax = fig.add_subplot(1,1,1)
 
-data = pd.read_csv('/Users/klein/git/Thermostat/src/Temperature_2022-12-09_.csv',index_col=0,parse_dates=True)
+data = pd.read_csv('/Users/klein/git/Thermostat/src/Temperature_2022-12-26_.csv',index_col=0,parse_dates=True)
 temp = data['temperature']*1.8+32
 #temp.plot()
 #temp.plot(ax=ax,marker='+',color='green',linestyle='None')
