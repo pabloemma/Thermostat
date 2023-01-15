@@ -22,7 +22,7 @@ class MyPandas(object):
 
         self.CreateFileName()
 
-        self.nx = nt.mytransfer()
+        #self.nx = nt.mytransfer()
  
 
     def CreateFrame(self):
@@ -68,7 +68,7 @@ class MyPandas(object):
         temp.to_csv(self.file_out,index = False)
         # now write to nextcloud
 
-        self.nx.upload_file(file_path_in = self.file_out , upload_dir = self.nextcloud_dir)
+        #self.nx.upload_file(file_path_in = self.file_out , upload_dir = self.nextcloud_dir)
            
 
 if __name__ == "__main__":
