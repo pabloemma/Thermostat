@@ -4,6 +4,7 @@ import datetime as dt
 import sys
 import json
 import os
+import nextcloud_transfer as nt
 
 class MyPandas(object):
 
