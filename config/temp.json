@@ -5,6 +5,10 @@
         "frequency"     : "10"
 
 
+    },
+    "Output" : {
+        "upload_dir"    : "Temperature"
+
     }
 
 }

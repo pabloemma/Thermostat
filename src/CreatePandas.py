@@ -21,6 +21,8 @@ class MyPandas(object):
             sys.exit(0)
 
         self.CreateFileName()
+
+        self.nx = nt.mytransfer()
  
 
     def CreateFrame(self):
@@ -50,6 +52,9 @@ class MyPandas(object):
             temp                     = myconf['Temp']['column_names']
             self.column_names        = temp.split(',')
             self.frequency           = myconf['Temp']['frequency'] #  every frequency we will write out
+    
+            self.nextcloud_dir       = myconf['Output']['upload_dir']
+    
         return
 
     def AddData(self,data_tuple):
@@ -61,6 +66,9 @@ class MyPandas(object):
         
         # write it out again
         temp.to_csv(self.file_out,index = False)
+        # now write to nextcloud
+
+        self.nx.upload_file(file_path_in = self.file_out , upload_dir = self.nextcloud_dir)
            
 
 if __name__ == "__main__":
