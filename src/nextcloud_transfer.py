@@ -1,11 +1,20 @@
 '''simple class to push and put files to our nextcloud server at home
+
+In order to use keyring, first create an entry (use python3 keyring)
+for nextcloud it would be as follows:
+    keyring.set_password("nextcloud", "pabloemma", "the password for nextcloud")
+    on linux you need to install kwallet with sudo apt install kwallet-manager and kwalletcli
+    that probably requires dbus-python, which gets installed with pip3
+    However dbus does not work with one of my raspi so it needs to have a
+    password in a file. This file should be named in the init 
+
 '''
 
 import sys
 import requests as rq
 import subprocess
 import os
-
+from pathlib import Path
 
 import importlib.util # to check if package is installed
 import keyring
@@ -19,9 +28,15 @@ class mytransfer(object):
 
     def __init__(self,
                 user = 'pabloemma',
+                passfile = '/private/pass/mypass.txt',
                 url = 'https://casitadongaspar.com/nextcloud/remote.php/dav/files/pabloemma/'):
 
- 
+        # create the proper main path
+        # determine the login dir, the passfile is then in ~/private/pass
+        self.passfile = str(Path.home())+passfile 
+
+
+
         self.passwd = passwd = self.get_login_info(user)
         self.user = user
         self.creds = user+':'+passwd
@@ -51,7 +66,14 @@ class mytransfer(object):
             
         except:
             print("cannot find user",user)
-            sys.exit(0)
+            print("trying to find pass file")
+            try:
+                user, password = self.get_creds()
+            except:
+                print('can\'t do the credentials')
+            
+            
+                sys.exit(0)
 
         return password
 
@@ -85,6 +107,23 @@ class mytransfer(object):
                         f.write(chunk)
 
         f.close()
+
+    def get_creds(self):
+        ''' gets credentails from file if keyring does not work, the formta of the file is:
+        nextcloud user pwd, where the first is the app which needs a pwd'''
+        if not os.path.exists(self.passfile):
+            print("File '{}' cant be found".format(self.passfile))
+            sys.exit(0)
+            
+        else:
+            f=open(self.passfile,'r')
+            a =  f.readlines()
+            b = a[0].split(' ')
+            user = b[1]
+            password = b[2].strip('\n')
+            return user,password
+
+
 
 
 
