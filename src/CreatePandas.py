@@ -60,16 +60,42 @@ class MyPandas(object):
     def AddData(self,data_tuple):
         '''adds a row of data to the end'''
 
-        #first read file
-        temp = pd.read_csv(self.file_out)
-        temp.loc[temp.index.max()+1] = data_tuple 
-        
+        # check time if we are close to midnight we create a new file
+
+        if not self.FlushTime:
+
+            #first read file
+            temp = pd.read_csv(self.file_out)
+            temp.loc[temp.index.max()+1] = data_tuple 
+        else:
+            self.CreateFileName()
+            self.MyFrame.to_csv(self.file_out,index=False,mode='w') # no , in the beginning
+         
         # write it out again
         temp.to_csv(self.file_out,index = False)
         # now write to nextcloud
 
         self.nx.upload_file(file_path_in = self.file_out , upload_dir = self.nextcloud_dir)
            
+    def FlushTime(self):
+        
+        """
+        checks time and if its close tp midnight returns True
+        """
+        timelimit = 23*60.+ 45  # this is how many minutes are to 23:45
+        #timelimit = 7*60.+ 40  # this is how many minutes are to 23:45
+        
+        #tomorrow = (dt.datetime.today()+dt.timedelta(1)).strftime('%Y-%m-%d')
+
+
+        b=  datetime.datetime.now()
+        #fill in tuple
+        a=b.timetuple()
+        current_minute = a[3]*60. + a[4]
+        if(current_minute > timelimit):
+            return True
+        else:
+            return False
 
 if __name__ == "__main__":
 
