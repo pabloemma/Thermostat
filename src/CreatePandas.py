@@ -62,7 +62,7 @@ class MyPandas(object):
 
         # check time if we are close to midnight we create a new file
 
-        if not self.FlushTime:
+        if not self.FlushTime():
             print("no flush")
             #first read file
             temp = pd.read_csv(self.file_out)
@@ -71,7 +71,7 @@ class MyPandas(object):
             temp.to_csv(self.file_out,index = False)
 
 
-        elif self.FlushTime:
+        elif self.FlushTime():
             print("flush")
             self.CreateFileName()
             self.MyFrame.to_csv(self.file_out,index=False,mode='w') # no , in the beginning
@@ -103,7 +103,7 @@ class MyPandas(object):
 if __name__ == "__main__":
 
 
-    config_file = '/home/klein/git/Thermostat/config/temp.json'
+    config_file = '/Users/klein/git/Thermostat/config/temp.json'
     MyP = MyPandas(config_file=config_file)
     MyP.CreateFrame()
     a=dt.datetime.now()
