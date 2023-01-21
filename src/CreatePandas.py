@@ -94,7 +94,7 @@ class MyPandas(object):
         #fill in tuple
         a=b.timetuple()
         current_minute = a[3]*60. + a[4]
-        print(a,' ' ,current_minute,' ' ,timelimit)
+        
         if(current_minute > timelimit):
             return True
         else:
