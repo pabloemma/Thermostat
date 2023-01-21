@@ -89,7 +89,7 @@ class MyPandas(object):
         #tomorrow = (dt.datetime.today()+dt.timedelta(1)).strftime('%Y-%m-%d')
 
 
-        b=  datetime.datetime.now()
+        b=  dt.datetime.now()
         #fill in tuple
         a=b.timetuple()
         current_minute = a[3]*60. + a[4]
