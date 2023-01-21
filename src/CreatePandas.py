@@ -63,7 +63,7 @@ class MyPandas(object):
         # check time if we are close to midnight we create a new file
 
         if not self.FlushTime:
-
+            print("no flush")
             #first read file
             temp = pd.read_csv(self.file_out)
             temp.loc[temp.index.max()+1] = data_tuple 
@@ -72,6 +72,7 @@ class MyPandas(object):
 
 
         else:
+            print("flush")
             self.CreateFileName()
             self.MyFrame.to_csv(self.file_out,index=False,mode='w') # no , in the beginning
          
