@@ -71,7 +71,7 @@ class MyPandas(object):
             temp.to_csv(self.file_out,index = False)
 
 
-        else:
+        elif self.FlushTime
             print("flush")
             self.CreateFileName()
             self.MyFrame.to_csv(self.file_out,index=False,mode='w') # no , in the beginning
@@ -94,6 +94,7 @@ class MyPandas(object):
         #fill in tuple
         a=b.timetuple()
         current_minute = a[3]*60. + a[4]
+        print(a,' ' ,current_minute,' ' ,timelimit)
         if(current_minute > timelimit):
             return True
         else:
