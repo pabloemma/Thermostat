@@ -71,7 +71,7 @@ class MyPandas(object):
             temp.to_csv(self.file_out,index = False)
 
 
-        elif self.FlushTime
+        elif self.FlushTime:
             print("flush")
             self.CreateFileName()
             self.MyFrame.to_csv(self.file_out,index=False,mode='w') # no , in the beginning
