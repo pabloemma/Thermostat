@@ -94,10 +94,13 @@ class mytransfer(object):
         subprocess.Popen(command,shell=True)
 
         
-    def pull_file(self,nextcloud_dir,nextcloud_filename,output_path):
+    def pull_file(self,nextcloud_dir,nextcloud_filename,output_path,nextcloud_url=None):
         ''' get the file with the requests'''
+        if(nextcloud_url != None):
+            self.nextcloud_url = nextcloud_url
         out_file = output_path+'/'+nextcloud_filename
-        r = rq.get(self.nextcloud_url+nextcloud_dir+'/'+nextcloud_filename, auth=(self.user,self.passwd))
+        input = self.nextcloud_url+nextcloud_dir+'/'+nextcloud_filename
+        r = rq.get(input, auth=(self.user,self.passwd))
         
 
         if r.status_code == 200:
@@ -106,7 +109,7 @@ class mytransfer(object):
                     if(chunk):
                         f.write(chunk)
 
-        f.close()
+            f.close()
 
     def get_creds(self):
         ''' gets credentails from file if keyring does not work, the formta of the file is:
@@ -127,8 +130,8 @@ class mytransfer(object):
 
 
 
-if __name__ == "__main__":  
 
+if __name__ == "__main__":  
     nxt = mytransfer()
     nxt.upload_file(file_path_in = '/Users/klein/finnland.pdf',upload_dir= 'Temperature' )
-    nxt.pull_file('Temperature','finnland.pdf','/Users/klein/scratch')
+    nxt.pull_file('Temperature','Temperature_2023-01-17_.csv','/Users/klein/scratch',nextcloud_url='https://casitadongaspar.com/nextcloud/remote.php/dav/files/pabloemma/')

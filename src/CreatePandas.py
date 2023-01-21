@@ -67,14 +67,15 @@ class MyPandas(object):
             #first read file
             temp = pd.read_csv(self.file_out)
             temp.loc[temp.index.max()+1] = data_tuple 
+                 # write it out again
+            temp.to_csv(self.file_out,index = False)
+
+
         else:
             self.CreateFileName()
             self.MyFrame.to_csv(self.file_out,index=False,mode='w') # no , in the beginning
          
-        # write it out again
-        temp.to_csv(self.file_out,index = False)
-        # now write to nextcloud
-
+               # now write to nextcloud
         self.nx.upload_file(file_path_in = self.file_out , upload_dir = self.nextcloud_dir)
            
     def FlushTime(self):
