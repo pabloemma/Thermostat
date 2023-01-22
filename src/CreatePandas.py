@@ -5,6 +5,7 @@ import sys
 import json
 import os
 import nextcloud_transfer as nt
+import time
 
 class MyPandas(object):
 
@@ -72,6 +73,8 @@ class MyPandas(object):
 
 
         elif self.FlushTime():
+
+            time.sleep(17*60)
             
             self.CreateFileName()
             self.MyFrame.to_csv(self.file_out,index=False,mode='w') # no , in the beginning
