@@ -4,9 +4,10 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 import sys
 
-print(sys.argv[0])
+#print(sys.argv[0])
 if(len(sys.argv) ==2):
     mydate = sys.argv[1]
+    print('plotting for  ',sys.argv[1])
 else:
     mydate = 'Today'
 
