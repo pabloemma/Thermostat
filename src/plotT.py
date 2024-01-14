@@ -2,12 +2,17 @@ import datetime as dt
 import pandas as pd
 import matplotlib.pyplot as plt
 from pathlib import Path
+import sys
 
-
+print(sys.argv[0])
+if(len(sys.argv ==2)):
+    mydate = sys.argv[1]
+else:
+    mydate = 'Today'
 
 fig = plt.figure()
 ax = fig.add_subplot(1,1,1)
-mydate = '2024-01-12'
+#mydate = '2024-01-12'
 #mydate = 'Today'        
 if mydate == 'Today':
     a=dt.datetime.now()
