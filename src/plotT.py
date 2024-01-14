@@ -5,7 +5,7 @@ from pathlib import Path
 import sys
 
 print(sys.argv[0])
-if(len(sys.argv ==2)):
+if(len(sys.argv) ==2):
     mydate = sys.argv[1]
 else:
     mydate = 'Today'
