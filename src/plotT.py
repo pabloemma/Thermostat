@@ -7,7 +7,7 @@ from pathlib import Path
 
 fig = plt.figure()
 ax = fig.add_subplot(1,1,1)
-mydate = '2024-01-13'
+mydate = '2024-01-12'
 #mydate = 'Today'        
 if mydate == 'Today':
     a=dt.datetime.now()
