@@ -1,0 +1,17 @@
+{
+    "Server": {
+        "server_name"       : "https://casitadongaspar.com/nextcloud/remote.php/dav/files/pabloemma/",
+        "server_dir"        : "Temperature"
+       
+
+
+    },
+    "Input" :{
+        "input_file"        : "Temperature_2024-01-12_.csv" 
+    },
+    "Output" : {
+        "temp_dir"          : "scratch/"
+
+    }
+
+}

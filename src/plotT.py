@@ -7,9 +7,14 @@ from pathlib import Path
 
 fig = plt.figure()
 ax = fig.add_subplot(1,1,1)
-a=dt.datetime.now()
-b=dt.datetime.strftime(a,"%Y-%m-%d")
-temp= 'Temperature_'+b+'_.csv'
+mydate = '2024-01-13'
+#mydate = 'Today'        
+if mydate == 'Today':
+    a=dt.datetime.now()
+    b=dt.datetime.strftime(a,"%Y-%m-%d")
+    temp= 'Temperature_'+b+'_.csv'
+else:
+    temp = 'Temperature_'+mydate+'_.csv'
 myfile =str(Path.home())+'/scratch/'+temp
 data = pd.read_csv(myfile,index_col=0,parse_dates=True)
 temp = data['temperature']*1.8+32
