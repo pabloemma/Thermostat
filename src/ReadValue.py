@@ -78,7 +78,7 @@ class MyInput(object):
         except:
             print('cant find file',self.CurrentT)
         mywarning = ' You need to move the slider, otherwise it takes 60 \n\n\n\n'
-        mytemp = 'Current Temperature  ' + str(int(float(c)))
+        mytemp = 'Current Temperature  ' + str(float(c))
         myset_t = 'Current Set Temperature '+ self.GetStartValue()+'\n\n'
         st.header(mywarning)
         st.header(myset_t)
