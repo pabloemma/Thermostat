@@ -129,8 +129,10 @@ class Tmeas(object):
 
         #Lets only deal with integer
         a=float(set_value)
-        b=int(a) # desired t
-        tm= int(self.RV.TconvertC2F(self.result['Temp'])) # measured T
+        #b=int(a) # desired t
+        #tm= int(self.RV.TconvertC2F(self.result['Temp'])) # measured T
+        b=(a) # desired t
+        tm= (self.RV.TconvertC2F(self.result['Temp'])) # measured T
         # now compare with measured value
         print('\r current temp', self.RV.TconvertC2F(self.result['Temp']),' desired T :',b, end='')
         open_valve = 0
