@@ -59,7 +59,7 @@ class Tmeas(object):
         self.counter = 0 # counter for writing away data
 
         #switch for debug
-        self.debug = True
+        self.debug = False
         
         # Create library object using our Bus I2C port
         if not self.testing:
