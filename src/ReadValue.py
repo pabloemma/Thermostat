@@ -73,6 +73,7 @@ class MyInput(object):
             b = current_t.split(' ')
             a = b[0].replace('C','')
             c = b[2].replace('F','')
+            c = '{0:.2f}'.format(c)
             converted_t = int(float(c))
             fh.close()
         except:
