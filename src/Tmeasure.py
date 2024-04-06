@@ -146,7 +146,7 @@ class Tmeas(object):
                 self.ControlValve()
             else:
                 if(self.debug):
-                    print('opening valve')
+                    print('leaving valve')
                 return
 
                 print('valve already open')
