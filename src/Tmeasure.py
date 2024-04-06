@@ -140,23 +140,35 @@ class Tmeas(object):
             if(self.valve_state == 0):
                 open_valve = 1 # open valve
                 self.valve_state = 1
-                print('opening valve')
-            self.ControlValve()
-            if(self.debug):
-                print('we are opening the valve')
+                if(self.debug):
+                    print('opening valve')
+
+                self.ControlValve()
+            else:
+                if(self.debug):
+                    print('opening valve')
+                return
+
+                print('valve already open')
         elif b == tm:
             open_valve = 0 # don't change the valve
             if(self.debug):
                 print('we are leaving the valve')
+            return 
         else:
             if(self.valve_state == 1):
      
                 open_valve = 0 # close the valve
                 self.valve_state = 0
                 self.ControlValve()
-                print('we are closing the valve')
+                if(self.debug):
+               
+                    print('we are closing the valve')
+                return
+            
+            else:
         
-        return open_valve
+                return 
 
 
     def PseudoData(self):
@@ -205,7 +217,7 @@ class Tmeas(object):
 
 
         else:
-            print(valve_state,' not defined')
+            print(self.valve_state,' not defined')
             pass
 
     def StoreT(self,t):
